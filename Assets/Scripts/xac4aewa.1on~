@@ -1,0 +1,205 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+
+public class PlayerTest : MonoBehaviour
+{
+    public GameObject player;
+    public GameObject basAvantGauche;
+    public GameObject basAvantDroite;
+    public GameObject basArriereGauche;
+    public GameObject basArriereDroite;
+    public GameObject hautAvantGauche;
+    public GameObject hautAvantDroite;
+    public GameObject hautArriereGauche;
+    public GameObject hautArriereDroite;
+
+    private int facade = 1;
+    private bool couchee = false;
+    private List<int> facadeList = new List<int>();
+    //Contôle
+    [Header("Contrôle")]
+    public KeyCode toucheGauche = KeyCode.A;
+    public KeyCode toucheDroite = KeyCode.D;
+    public KeyCode toucheAvant = KeyCode.W;
+    public KeyCode toucheArriere = KeyCode.S;
+    public KeyCode toucheReinitialiser = KeyCode.Space;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(toucheDroite))
+        {
+           if(facade == 1)
+            {
+                player.transform.RotateAround(basArriereDroite.transform.position, Vector3.forward, 90);
+                facade = 2;
+                couchee = true;
+            }else if(facade == 2)
+            {
+                player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.forward, 90);
+                facade = 6;
+                couchee = false;
+            }else if (facade == 3)
+            {
+                player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.forward, 90);
+                facade = 2;
+            }
+            else if (facade == 4)
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.forward, 90);
+                facade = 1;
+                couchee = true;
+            }
+            else if (facade == 5)
+            {
+                player.transform.RotateAround(basArriereDroite.transform.position, Vector3.forward, 90);
+                facade = 2;
+            }
+            else if (facade == 6)
+            {
+                player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.forward, 90);
+                facade = 4;
+                couchee = true;
+            }
+            facadeList.Add(facade);
+        }
+        if (Input.GetKeyDown(toucheGauche))
+        {
+            if (facade == 1)
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.back, 90);
+                facade = 4;
+                couchee = true;
+            }else if (facade == 2)
+            {
+                player.transform.RotateAround(basAvantDroite.transform.position, Vector3.back, 90);
+                facade = 1;
+                couchee = false;
+            }else if (facade == 3)
+            {
+                player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.back, 90);
+                facade = 4;
+            }
+            else if (facade == 4)
+            {
+                player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.back, 90);
+                facade = 6;
+                couchee = false;
+            }
+            else if (facade == 5)
+            {
+                player.transform.RotateAround(basArriereGauche.transform.position, Vector3.back, 90);
+                facade = 4;
+            }
+            else if (facade == 6)
+            {
+                player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.back, 90);
+                facade = 2;
+                couchee = true;
+            }
+            facadeList.Add(facade);
+        }
+        if (Input.GetKeyDown(toucheAvant))
+        {
+            if (facade == 1)
+            {
+                player.transform.RotateAround(basArriereDroite.transform.position, Vector3.left, 90);
+                facade = 5;
+                couchee = true;
+            }else if  (facade == 2)
+            {
+                player.transform.RotateAround(basArriereDroite.transform.position, Vector3.left, 90);
+                facade = 5;
+            }else if (facade == 3)
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.left, 90);
+                facade = 1;
+            }
+            else if (facade == 4)
+            {
+                player.transform.RotateAround(hautArriereGauche.transform.position, Vector3.left, 90);
+                facade = 5;
+            }
+            else if (facade == 5)
+            {
+                player.transform.RotateAround(hautArriereGauche.transform.position, Vector3.left, 90);
+                facade = 6;
+                couchee = false;
+            }
+            else if (facade == 6)
+            {
+                if(hautArriereDroite.transform.position.y < 0)
+                {
+                    player.transform.RotateAround(hautArriereDroite.transform.position, Vector3.left, 90);
+                    facade = 5;
+                }
+                else
+                {
+                    player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.left, 90);
+                    facade = 3;
+                }
+                
+            }
+            facadeList.Add(facade);
+        }
+        if (Input.GetKeyDown(toucheArriere))
+        {
+            if (facade == 1)
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.right, 90);
+                facade = 3;
+            } else if (facade == 2)
+            {
+                player.transform.RotateAround(basAvantDroite.transform.position, Vector3.right, 90);
+                facade = 3;
+            } else if (facade == 3)
+            {
+                player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.right, 90);
+                facade = 6;
+            }
+            else if (facade == 4)
+            {
+                player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.right, 90);
+                facade = 3;
+            }
+            else if (facade == 5)
+            {
+                player.transform.RotateAround(basArriereGauche.transform.position, Vector3.right, 90);
+                facade = 1;
+            }
+            else if (facade == 6)
+            {
+                if (facadeList[facadeList.Count - 2] == 3)
+                {
+                    player.transform.RotateAround(hautArriereGauche.transform.position, Vector3.right, 90);
+                    facade = 5;
+                }else
+                {
+                    player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.right, 90);
+                    facade = 3;
+                }
+                Debug.Log(facadeList[facadeList.Count - 2]);
+            }
+            facadeList.Add(facade);
+        }
+        
+        if (Input.GetKeyDown(toucheReinitialiser))
+        {
+            player.transform.position = new Vector3(0, 1, 0);
+            player.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            facade = 1;
+        }
+       Debug.Log(facade);
+       /*if(facadeList.Count > 2)
+        {
+            Debug.Log(facadeList[facadeList.Count - 1]);
+        }*/
+    }
+}

@@ -1,0 +1,190 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player : MonoBehaviour
+{
+    public GameObject player;
+    public GameObject basAvantGauche;
+    public GameObject basAvantDroite;
+    public GameObject basArriereGauche;
+    public GameObject basArriereDroite;
+    public GameObject hautAvantGauche;
+    public GameObject hautAvantDroite;
+    public GameObject hautArriereGauche;
+    public GameObject hautArriereDroite;
+
+    private int positionJoueurVertical = 0;
+    private int positionJoueurHorizontal = 0;
+
+    //Contôle
+    [Header("Contrôle")]
+    public KeyCode toucheGauche = KeyCode.A;
+    public KeyCode toucheDroite = KeyCode.D;
+    public KeyCode toucheAvant = KeyCode.W;
+    public KeyCode toucheArriere = KeyCode.S;
+    public KeyCode toucheReinitialiser = KeyCode.Space;
+    // Start is called before the first frame update
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(toucheDroite))
+        {
+            if ((positionJoueurVertical == 0 && (positionJoueurHorizontal == 0 || positionJoueurHorizontal == -3 || positionJoueurHorizontal == 1)) || (positionJoueurVertical == 1 && positionJoueurHorizontal == -2) || (positionJoueurHorizontal == 2 && (positionJoueurVertical == 1 || positionJoueurVertical == -3 )) || (positionJoueurHorizontal == 3 && positionJoueurVertical == 1))
+            {
+                player.transform.RotateAround(basArriereDroite.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("1");
+            }
+            else if ((positionJoueurHorizontal == 1 && positionJoueurVertical == 3) || (positionJoueurHorizontal == 3 && positionJoueurVertical == -2))
+            {
+                player.transform.RotateAround(hautArriereGauche.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("2");
+            }
+            else if ((positionJoueurVertical == 1 && positionJoueurHorizontal == 0) || (positionJoueurVertical == -3 && positionJoueurHorizontal == 0) || (positionJoueurVertical == 1 && positionJoueurHorizontal == -1))
+            {
+                player.transform.RotateAround(hautArriereDroite.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("2");
+            } else if (((positionJoueurVertical == 2 || positionJoueurVertical == -2) && positionJoueurHorizontal == 0) || ( positionJoueurVertical == 3 && (positionJoueurHorizontal > 0 || (positionJoueurHorizontal > -3 && positionJoueurHorizontal < 0))) || (positionJoueurVertical == 2 && positionJoueurHorizontal == -3) || (positionJoueurHorizontal == 1 && positionJoueurVertical == 2))
+            {
+                player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("3");
+            }
+            else if (((positionJoueurVertical == 3 || positionJoueurVertical == -1) && positionJoueurHorizontal == 0) || (positionJoueurVertical == 2) || (positionJoueurVertical == 3 && positionJoueurHorizontal == -3) || (positionJoueurHorizontal == 1 && (positionJoueurVertical == 3 || positionJoueurVertical == -1)) || (positionJoueurHorizontal == 2 && positionJoueurVertical == -2))
+            {
+                player.transform.RotateAround(basArriereGauche.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("4");
+            }
+            else if (((positionJoueurVertical == 0 || (positionJoueurVertical == 1 && positionJoueurHorizontal == -3))))
+            {
+                player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("5");
+            }else if (positionJoueurHorizontal == 1 && (positionJoueurVertical == 1 || positionJoueurVertical == -3))
+            {
+                player.transform.RotateAround(basAvantDroite.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("6");
+            }else if (positionJoueurHorizontal == 1 && positionJoueurVertical == -2)
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.forward, 90);
+                positionJoueurVertical++;
+                Debug.Log("7");
+            }
+            Debug.Log("Vertical" + positionJoueurVertical);
+            Debug.Log("Horizontal" + positionJoueurHorizontal);
+        }
+        if (Input.GetKeyDown(toucheGauche))
+        {
+            if ((positionJoueurVertical == 0 && positionJoueurHorizontal == 0) || ((positionJoueurHorizontal == -2 || positionJoueurHorizontal == 1) && (positionJoueurVertical == -1 || positionJoueurVertical == 3)) || (positionJoueurHorizontal == -3 && positionJoueurVertical == -1))
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            } else if (((positionJoueurVertical == -1 || positionJoueurVertical == 3) && (positionJoueurHorizontal == 0 || positionJoueurHorizontal == 3)) || (positionJoueurHorizontal == -1 && positionJoueurVertical == -1) || ((positionJoueurHorizontal == -2 || positionJoueurHorizontal == 2) && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(hautArriereGauche.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            } else if (((positionJoueurVertical == -2 || positionJoueurVertical == 2) && positionJoueurHorizontal == 0) || ((positionJoueurHorizontal == -1 || positionJoueurHorizontal == 3) && (positionJoueurVertical == -3 || positionJoueurVertical == 1)))
+            {
+                player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            } else if (((positionJoueurVertical == -3 || positionJoueurVertical == 1) && positionJoueurHorizontal == 0) || (positionJoueurHorizontal == -2 && positionJoueurVertical == -2) || (positionJoueurHorizontal == -3 && positionJoueurVertical == -2) || ((positionJoueurHorizontal == 1 || positionJoueurVertical == 2) && (positionJoueurVertical == -2 || positionJoueurVertical == 2)))
+            {
+                player.transform.RotateAround(basAvantDroite.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            }else if (((positionJoueurHorizontal == -1 || positionJoueurHorizontal == 3) && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(hautAvantGauche.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            }else if (((positionJoueurHorizontal == -1 || positionJoueurHorizontal == 3) && positionJoueurVertical == -2) || (positionJoueurHorizontal == -2 && positionJoueurVertical == -3) || (positionJoueurHorizontal == 2 && (positionJoueurVertical == -3 || positionJoueurVertical == 1)))
+            {
+                player.transform.RotateAround(hautArriereDroite.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            }else if (((positionJoueurHorizontal == -3 || positionJoueurHorizontal == 1) && positionJoueurVertical == 0) || (positionJoueurHorizontal == 2 && (positionJoueurVertical == -1 || positionJoueurVertical == 3)))
+            {
+                player.transform.RotateAround(basArriereGauche.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            }else if ((positionJoueurHorizontal == -3 && positionJoueurVertical == -3) || (positionJoueurHorizontal == 1 && (positionJoueurVertical == -3 || positionJoueurVertical == 1)) || (positionJoueurHorizontal == 2 && positionJoueurVertical == -2))
+            {
+                player.transform.RotateAround(basArriereDroite.transform.position, Vector3.back, 90);
+                positionJoueurVertical--;
+            }
+            Debug.Log("Vertical" + positionJoueurVertical);
+            Debug.Log("Horizontal" + positionJoueurHorizontal);
+        }
+        if (Input.GetKeyDown(toucheAvant))
+        {
+            if ((positionJoueurHorizontal == 0 && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(basArriereDroite.transform.position, Vector3.left, 90);
+                positionJoueurHorizontal++;
+            }
+            else if (((positionJoueurHorizontal == 1 || positionJoueurHorizontal == -3) && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(hautArriereGauche.transform.position, Vector3.left, 90);
+                positionJoueurHorizontal++;
+            }
+            else if (((positionJoueurHorizontal == 2 || positionJoueurHorizontal == -2)) && positionJoueurVertical == 0)
+            {
+                player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.left, 90);
+                positionJoueurHorizontal++;
+            }
+            else if (((positionJoueurHorizontal == 3 || positionJoueurHorizontal == -1) && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.left, 90);
+                positionJoueurHorizontal++;
+            }
+            Debug.Log("Vertical" + positionJoueurVertical);
+            Debug.Log("Horizontal" + positionJoueurHorizontal);
+        }
+        if (Input.GetKeyDown(toucheArriere))
+        {
+            if ((positionJoueurHorizontal == 0 && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(basAvantGauche.transform.position, Vector3.right, 90);
+                positionJoueurHorizontal--;
+            }
+            else if (((positionJoueurHorizontal == -1 || positionJoueurHorizontal == 3) && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(hautAvantDroite.transform.position, Vector3.right, 90);
+                positionJoueurHorizontal--;
+            }
+            else if (((positionJoueurHorizontal == -2 || positionJoueurHorizontal == 2) && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(hautArriereGauche.transform.position, Vector3.right, 90);
+                positionJoueurHorizontal--;
+            }
+            else if (((positionJoueurHorizontal == -3 || positionJoueurHorizontal == 1) && positionJoueurVertical == 0))
+            {
+                player.transform.RotateAround(basArriereGauche.transform.position, Vector3.right, 90);
+                positionJoueurHorizontal--;
+            }
+            Debug.Log("Vertical" + positionJoueurVertical);
+            Debug.Log("Horizontal" + positionJoueurHorizontal);
+        }
+        if (positionJoueurVertical == 4 || positionJoueurVertical == -4)
+        {
+            positionJoueurVertical = 0;
+        }
+        if(positionJoueurHorizontal == 4 || positionJoueurHorizontal == -4)
+        {
+            positionJoueurHorizontal = 0;
+        }
+        if (Input.GetKeyDown(toucheReinitialiser))
+        {
+            player.transform.position = new Vector3(0,1,0);
+            player.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            positionJoueurHorizontal = 0;
+            positionJoueurVertical = 0;
+        }
+    }
+}

@@ -1,0 +1,154 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Player2 : MonoBehaviour
+{
+    public GameObject player;
+    public GameObject basAvant;
+    public GameObject basArriere;
+    public GameObject basDroite;
+    public GameObject basGauche;
+    public GameObject hautAvant;
+    public GameObject hautArriere;
+    public GameObject hautDroite;
+    public GameObject hautGauche;    
+    public GameObject avantGauche;
+    public GameObject avantDroite;
+    public GameObject arriereGauche;
+    public GameObject arriereDroite;
+
+    private int[] positionPlayer = new int[6] { 1,2,5,6,4,3}; //Haut, Bas, Gauche, Droite, Avant, Arrière
+    private GameObject[] arrete = new GameObject[4]; //Avant, Arrière, Gauche, Droite
+
+    //Contôle
+    [Header("Contrôle")]
+    public KeyCode toucheGauche = KeyCode.A;
+    public KeyCode toucheDroite = KeyCode.D;
+    public KeyCode toucheAvant = KeyCode.W;
+    public KeyCode toucheArriere = KeyCode.S;
+    public KeyCode toucheReinitialiser = KeyCode.Space;
+    // Start is called before the first frame update
+    void Start()
+    {
+        arrete[0] = basAvant;
+        arrete[1] = basArriere;
+        arrete[2] = basGauche;
+        arrete[3] = basDroite;
+    }
+
+    // Update is called once per frame
+    //Vérifrication coutinue pour vérifier si l'utilisateur à touché une touche
+    void Update()
+    {
+        if (Input.GetKeyDown(toucheAvant))
+        {
+            player.transform.RotateAround(arrete[0].transform.position, Vector3.left, 90);
+            updatePositionPlayer("Avant");
+        }
+        if (Input.GetKeyDown(toucheArriere))
+        {
+            player.transform.RotateAround(arrete[1].transform.position, Vector3.right, 90);
+            updatePositionPlayer("Arriere");
+        }
+        if (Input.GetKeyDown(toucheGauche))
+        {
+            player.transform.RotateAround(arrete[2].transform.position, Vector3.back, 90);
+            updatePositionPlayer("Gauche");
+        }
+        if (Input.GetKeyDown(toucheDroite))
+        {
+            player.transform.RotateAround(arrete[3].transform.position, Vector3.forward, 90);
+            updatePositionPlayer("Droite");
+        }
+
+    }
+    //Haut, Bas, Gauche, Droite, Avant, Arrière
+    //private int[] positionPlayer = new int[6] {  6,    5,    1,       2,     4,     3}; 
+    //  0     1     2        3      4      5
+    //Function qui permet de modifier le tableau de position avec de nouvelle positon
+    //selon la touche touché par l'utilisateur
+    void updatePositionPlayer(string touche)
+    {
+        int[] positionPlayerTempo = new int[6];
+        positionPlayerTempo = positionPlayer;
+
+        if (touche == "Avant")
+        {
+            positionPlayer[0] = positionPlayerTempo[4];
+            positionPlayer[1] = positionPlayerTempo[5];
+            positionPlayer[4] = positionPlayerTempo[1];
+            positionPlayer[5] = positionPlayerTempo[0];
+
+        }else if(touche == "Arriere")
+        {
+            positionPlayer[0] = positionPlayerTempo[5];
+            positionPlayer[1] = positionPlayerTempo[4];
+            positionPlayer[4] = positionPlayerTempo[0];
+            positionPlayer[5] = positionPlayerTempo[1];
+        }
+        else if(touche == "Gauche")
+        {
+            positionPlayer[0] = positionPlayerTempo[3];
+            positionPlayer[1] = positionPlayerTempo[2];
+            positionPlayer[2] = positionPlayerTempo[0];
+            positionPlayer[3] = positionPlayerTempo[1];
+        }
+        else if(touche == "Droite")
+        {
+            positionPlayer[0] = positionPlayerTempo[2];
+            positionPlayer[1] = positionPlayerTempo[3];
+            positionPlayer[2] = positionPlayerTempo[1];
+            positionPlayer[3] = positionPlayerTempo[0];
+        }
+    }
+
+    //Function qui va permettre de mettre les bons arrêtes selon la face qui touche le sol.
+    //Avant, Arrière, Gauche, Droite
+    // 0       1        2      3
+    //basAvant; basArriere; basDroite; basGauche; hautAvant; hautArriere; hautDroite; hautGauche; avantGauche; avantDroite; arriereGauche; arriereDroite;
+    void updateArrete()
+    {
+        if (positionPlayer[1] == 1)
+        {
+            arrete[0] = 
+            arrete[1] = 
+            arrete[2] = 
+            arrete[3] = 
+        } else if (positionPlayer[1] == 2)
+        {
+            arrete[0] = 
+            arrete[1] = 
+            arrete[2] = 
+            arrete[3] = 
+        }
+        else if (positionPlayer[1] == 3)
+        {
+            arrete[0] = 
+            arrete[1] = 
+            arrete[2] = 
+            arrete[3] = 
+        }
+        else if (positionPlayer[1] == 4)
+        {
+            arrete[0] = 
+            arrete[1] = 
+            arrete[2] = 
+            arrete[3] = 
+        }
+        else if (positionPlayer[1] == 5)
+        {
+            arrete[0] = 
+            arrete[1] = 
+            arrete[2] = 
+            arrete[3] = 
+        }
+        else if (positionPlayer[1] == 6)
+        {
+            arrete[0] = 
+            arrete[1] = 
+            arrete[2] = 
+            arrete[3] = 
+        }
+    }
+}
